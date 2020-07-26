@@ -1,13 +1,14 @@
 import * as express from "express";
 import { Connection } from "typeorm";
-import { UserRepository } from "./repositories";
+import { DDDFeeRepository, OfferRepository } from "./repositories";
 
 export interface IContext {
   captureException(error: Error): void;
   app: express.Application;
   db: {
     connection: Connection;
-    users: UserRepository;
+    dddFeeRepository: DDDFeeRepository;
+    offerRepository: OfferRepository;
   };
 }
 
@@ -33,7 +34,8 @@ export class Context {
       captureException: () => null,
       db: {
         connection,
-        users: connection.getCustomRepository(UserRepository),
+        dddFeeRepository: connection.getCustomRepository(DDDFeeRepository),
+        offerRepository: connection.getCustomRepository(OfferRepository),
       },
     };
   }
