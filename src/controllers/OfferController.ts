@@ -1,20 +1,22 @@
 import { Request, Response } from "express";
 import * as HTTPStatus from "http-status";
+import { Context } from "../context";
 import { responseErrorHandler } from "../errorHandlerApi";
-import dddFeeService from "../services/DDDFeeService";
 
-class DDDFeeController {
+class OfferController {
   /**
-   * Get availiable DDD list
+   * Get availiable Offer list
    *
    * @export
    * @param {Request} req
    * @param {Response} res
    */
-  async getAvailiableDDDList(req: Request, res: Response) {
+  async getAvailiableOfferList(req: Request, res: Response) {
+    const listOffer = await Context.getInstance().db.offerRepository.find({});
+
     try {
       res.status(HTTPStatus.OK).json({
-        data: await dddFeeService.getListDDD(),
+        data: listOffer,
         message: "OK",
       });
     } catch (err) {
@@ -23,4 +25,4 @@ class DDDFeeController {
     }
   }
 }
-export default new DDDFeeController();
+export default new OfferController();

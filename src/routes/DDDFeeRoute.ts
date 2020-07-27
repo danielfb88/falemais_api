@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
-import { DDDFeeController } from "../controllers/DDDFeeController";
+import dddFeeController from "../controllers/DDDFeeController";
 
 class DDDFeeRoute {
-  controller: DDDFeeController = new DDDFeeController();
-
   /**
    * Get route for availiable DDD list
    *
@@ -13,7 +11,7 @@ class DDDFeeRoute {
    * @memberof DDDFeeRoute
    */
   async getAvailiableDDDList(req: Request, res: Response) {
-    return this.controller.getAvailiableDDDList(req, res);
+    return dddFeeController.getAvailiableDDDList(req, res);
   }
 }
 
