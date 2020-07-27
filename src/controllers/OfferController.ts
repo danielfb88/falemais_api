@@ -14,7 +14,7 @@ class OfferController {
    * @param {Response} res
    */
   async getAvailiableOfferList(req: Request, res: Response) {
-    const listOffer = await Context.getInstance().db.offerRepository.find({});
+    const listOffer = await Context.getInstance().db.offer.find({});
 
     try {
       res.status(HTTPStatus.OK).json({
@@ -41,13 +41,13 @@ class OfferController {
     console.log(req.query);
 
     try {
-      const offer = await Context.getInstance().db.offerRepository.findOne({
+      const offer = await Context.getInstance().db.offer.findOne({
         where: {
           simpleName: qsOffer,
         },
       });
 
-      const dddFee = await Context.getInstance().db.dddFeeRepository.findOne({
+      const dddFee = await Context.getInstance().db.dddFee.findOne({
         where: {
           fromDDD: qsFrom,
           toDDD: qsTo,

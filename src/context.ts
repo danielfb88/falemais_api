@@ -7,8 +7,8 @@ export interface IContext {
   app: express.Application;
   db: {
     connection: Connection;
-    dddFeeRepository: DDDFeeRepository;
-    offerRepository: OfferRepository;
+    dddFee: DDDFeeRepository;
+    offer: OfferRepository;
   };
 }
 
@@ -34,8 +34,8 @@ export class Context {
       captureException: () => null,
       db: {
         connection,
-        dddFeeRepository: connection.getCustomRepository(DDDFeeRepository),
-        offerRepository: connection.getCustomRepository(OfferRepository),
+        dddFee: connection.getCustomRepository(DDDFeeRepository),
+        offer: connection.getCustomRepository(OfferRepository),
       },
     };
   }

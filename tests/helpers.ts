@@ -65,7 +65,7 @@ export function makeCtx(ctx: DeepPartial<IContext>) {
     db: {
       connection,
       dddRepository: connection.getCustomRepository(DDDFeeRepository),
-      offerRepository: connection.getCustomRepository(OfferRepository),
+      offer: connection.getCustomRepository(OfferRepository),
     },
     ...ctx,
   } as IContext;

@@ -29,7 +29,7 @@ class DDDFeeService {
    * @memberof DDDFeeService
    */
   async getListDDD() {
-    const listDDDFee = await Context.getInstance().db.dddFeeRepository.find({});
+    const listDDDFee = await Context.getInstance().db.dddFee.find({});
 
     const listDDDUniqueFrom = this.getListDDDUniqueFrom(listDDDFee);
 
