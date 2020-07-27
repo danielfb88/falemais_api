@@ -18,42 +18,10 @@ export function internalErrorResponse(res: Response) {
  *
  * @export
  * @param {Response} res
- * @param {string} objName
+ * @param {string} message
  */
-export function notFoundResponse(res: Response, objName: string | undefined) {
-  res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ errorCode: "ERR-002", message: `${objName} not found` });
-}
-
-/**
- * Response for unauthorized login
- *
- * @export
- * @param {Response} res
- */
-export function unauthorizedLoginResponse(res: Response) {
-  console.log(`*** Authentication failed ***`);
-  res.status(HTTPStatus.UNAUTHORIZED).json({ message: "Authentication failed. User or Password invalid." });
-}
-
-/**
- * Response for unauthorized token
- *
- * @export
- * @param {Response} res
- */
-export function unauthorizedTokenResponse(res: Response) {
-  console.log(`*** Authentication failed ***`);
-  res.status(HTTPStatus.UNAUTHORIZED).json({ message: "Authentication failed. Token invalid." });
-}
-
-/**
- * Response for duplicated resource
- *
- * @export
- * @param {Response} res
- */
-export function duplicatedResourceResponse(res: Response) {
-  res.status(HTTPStatus.UNAUTHORIZED).json({ message: "Duplicated resource" });
+export function notFoundResponse(res: Response, message: string) {
+  res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ errorCode: "ERR-002", message });
 }
 
 /**
@@ -88,9 +56,9 @@ export function errorHandlerApi(err: ErrorRequestHandler, req: Request, res: Res
  * @param {Response} res
  * @param {string} ObjName
  */
-export function responseErrorHandler(err: Error, res: Response, ObjName?: string) {
+export function responseErrorHandler(err: Error, res: Response) {
   if (err instanceof NotFoundError) {
-    notFoundResponse(res, ObjName);
+    notFoundResponse(res, err.message);
   } else if (err instanceof InvalidArgumentError) {
     invalidArgumentResponse(res);
   } else {

@@ -1,10 +1,6 @@
 import { Context } from "../context";
 import { DDDFee } from "../models";
-
-interface IDDD {
-  fromDDD: string;
-  toDDD: string[];
-}
+import { IDDD } from "../types";
 
 class DDDFeeService {
   /**

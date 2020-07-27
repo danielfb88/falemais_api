@@ -17,6 +17,10 @@ class Routes {
     app.route("/api/offer/availiable").get((req, res) => {
       offerRoute.getAvailiableOfferList(req, res);
     });
+
+    app.route("/api/offer/callprice").get((req, res) => {
+      offerRoute.calculateCallPrice(req, res);
+    });
   }
 }
 
