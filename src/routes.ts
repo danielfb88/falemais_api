@@ -1,12 +1,16 @@
 import { Application } from "express";
-import { DDDFeeRoute } from "./routes/DDDFeeRoute";
+import dddFeeRoute from "./routes/DDDFeeRoute";
 
 class Routes {
-  dddFeeRoute = new DDDFeeRoute();
-
+  /**
+   * Initialize routes
+   *
+   * @param {Application} app
+   * @memberof Routes
+   */
   initRoutes(app: Application): void {
-    app.route("/api/ddd").get((req, res) => {
-      this.dddFeeRoute.getDDDList(req, res);
+    app.route("/api/ddd/availiable").get((req, res) => {
+      dddFeeRoute.getAvailiableDDDList(req, res);
     });
   }
 }

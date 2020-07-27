@@ -20,7 +20,7 @@ export function internalErrorResponse(res: Response) {
  * @param {Response} res
  * @param {string} objName
  */
-export function notFoundResponse(res: Response, objName: string) {
+export function notFoundResponse(res: Response, objName: string | undefined) {
   res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ errorCode: "ERR-002", message: `${objName} not found` });
 }
 
@@ -86,11 +86,11 @@ export function errorHandlerApi(err: ErrorRequestHandler, req: Request, res: Res
  * @export
  * @param {Error} err
  * @param {Response} res
- * @param {string} notFoundObjName
+ * @param {string} ObjName
  */
-export function responseErrorHandler(err: Error, res: Response, notFoundObjName: string) {
+export function responseErrorHandler(err: Error, res: Response, ObjName?: string) {
   if (err instanceof NotFoundError) {
-    notFoundResponse(res, notFoundObjName);
+    notFoundResponse(res, ObjName);
   } else if (err instanceof InvalidArgumentError) {
     invalidArgumentResponse(res);
   } else {
