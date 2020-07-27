@@ -14,9 +14,9 @@ export class Offers1595787647575 implements MigrationInterface {
         `, undefined);
 
         await queryRunner.query(`
-            INSERT INTO "offers" ("name", "simple_name", "free_minuts", "price") VALUES ('FaleMais 30', 'fm30', 30, 0);
-            INSERT INTO "offers" ("name", "simple_name", "free_minuts", "price") VALUES ('FaleMais 60', 'fm60', 60, 0);
-            INSERT INTO "offers" ("name", "simple_name", "free_minuts", "price") VALUES ('FaleMais 120', 'fm120', 120, 0);
+            INSERT INTO "offers" ("name", "simple_name", "free_minutes", "price") VALUES ('FaleMais 30', 'fm30', 30, 0);
+            INSERT INTO "offers" ("name", "simple_name", "free_minutes", "price") VALUES ('FaleMais 60', 'fm60', 60, 0);
+            INSERT INTO "offers" ("name", "simple_name", "free_minutes", "price") VALUES ('FaleMais 120', 'fm120', 120, 0);
         `, undefined);
     }
 

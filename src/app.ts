@@ -2,7 +2,7 @@ import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as morgan from "morgan";
 import { errorHandlerApi } from "./errorHandlerApi";
-import { initRoutes } from "./routes";
+import routes from "./routes";
 
 class App {
   public express: express.Application;
@@ -24,7 +24,7 @@ class App {
   }
 
   private router(app: express.Application): void {
-    initRoutes(app);
+    routes.initRoutes(app);
   }
 }
 export default new App().express;

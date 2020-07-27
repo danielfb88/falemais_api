@@ -1,6 +1,14 @@
 import { Application } from "express";
-import * as userRoutes from "./routes/userRoute";
+import { DDDFeeRoute } from "./routes/DDDFeeRoute";
 
-export function initRoutes(app: Application): void {
-  app.route("/api/user/all").get(userRoutes.getAll);
+class Routes {
+  dddFeeRoute = new DDDFeeRoute();
+
+  initRoutes(app: Application): void {
+    app.route("/api/ddd").get((req, res) => {
+      this.dddFeeRoute.getDDDList(req, res);
+    });
+  }
 }
+
+export default new Routes();

@@ -1,13 +1,12 @@
 import * as http from "http";
 import "reflect-metadata";
 import { createConnection, getConnectionOptions } from "typeorm";
-import Api from "./app";
+import App from "./app";
 import { Context } from "./context";
-import "./controllers";
 
 process.env.TZ = "UTC";
 
-const server = http.createServer(Api);
+const server = http.createServer(App);
 
 getConnectionOptions()
   .then(async options => {
@@ -17,7 +16,7 @@ getConnectionOptions()
     });
   })
   .then(connection => {
-    Context.createContext({ app: Api, connection });
+    Context.createContext({ app: App, connection });
 
     const port = process.env.PORT ?? "8000";
 
