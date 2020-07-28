@@ -14,7 +14,7 @@ module.exports = {
   cli: {
     migrationsDir: "src/migrations",
   },
-  entities: ["src/models/*.{js,ts}"],
-  migrations: ["src/migrations/*.{js,ts}"],
+  entities: ["build/src/models/*.js"],
+  migrations: ["build/src/migrations/*.js"],
   namingStrategy: new SnakeNamingStrategy(),
 };
