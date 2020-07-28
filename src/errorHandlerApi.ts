@@ -1,6 +1,7 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { Response } from "express";
 import * as HTTPStatus from "http-status";
 import { InvalidArgumentError } from "./errors/InvalidArgumentError";
+import { MissingArgumentError } from "./errors/MissingArgumentError";
 import { NotFoundError } from "./errors/NotFoundError";
 
 /**
@@ -9,8 +10,8 @@ import { NotFoundError } from "./errors/NotFoundError";
  * @export
  * @param {Response} res
  */
-export function internalErrorResponse(res: Response) {
-  res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ errorCode: "ERR-001", message: "Server internal error" });
+export function internalErrorResponse(res: Response, message: string) {
+  res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ errorCode: "ERR-001", message });
 }
 
 /**
@@ -30,22 +31,18 @@ export function notFoundResponse(res: Response, message: string) {
  * @export
  * @param {Response} res
  */
-export function invalidArgumentResponse(res: Response) {
-  res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ message: "Invalid argument" });
+export function invalidArgumentResponse(res: Response, message: string) {
+  res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ errorCode: "ERR-003", message });
 }
 
 /**
- * Error handler
+ * Response for missing argument
  *
  * @export
- * @param {ErrorRequestHandler} err
- * @param {Request} req
  * @param {Response} res
- * @param {NextFunction} next
  */
-export function errorHandlerApi(err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) {
-  console.error(`API error handler was executed: ${err}`);
-  internalErrorResponse(res);
+export function missingArgumentResponse(res: Response, message: string) {
+  res.status(HTTPStatus.INTERNAL_SERVER_ERROR).json({ errorCode: "ERR-004", message });
 }
 
 /**
@@ -60,8 +57,10 @@ export function responseErrorHandler(err: Error, res: Response) {
   if (err instanceof NotFoundError) {
     notFoundResponse(res, err.message);
   } else if (err instanceof InvalidArgumentError) {
-    invalidArgumentResponse(res);
+    invalidArgumentResponse(res, err.message);
+  } else if (err instanceof MissingArgumentError) {
+    missingArgumentResponse(res, err.message);
   } else {
-    internalErrorResponse(res);
+    internalErrorResponse(res, err.message);
   }
 }

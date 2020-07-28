@@ -1,7 +1,6 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as morgan from "morgan";
-import { errorHandlerApi } from "./errorHandlerApi";
 import routes from "./routes";
 
 class App {
@@ -16,7 +15,6 @@ class App {
     this.express.use(morgan("dev"));
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(bodyParser.json());
-    this.express.use(errorHandlerApi);
     this.router(this.express);
 
     // Secret used by JWT

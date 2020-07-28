@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as HTTPStatus from "http-status";
 import { Context } from "../context";
 import { responseErrorHandler } from "../errorHandlerApi";
+import { MissingArgumentError } from "../errors/MissingArgumentError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { IPrice } from "../types";
 
@@ -35,10 +36,26 @@ class OfferController {
    * @memberof OfferController
    */
   async calculateCallPrice(req: Request, res: Response) {
-    const { from: qsFrom, to: qsTo, offer: qsOffer, minutes: qsMinutes } = req.query;
-    const minutes = parseInt(qsMinutes as string, 10);
-
     try {
+      const { from: qsFrom, to: qsTo, offer: qsOffer, minutes: qsMinutes } = req.query;
+      const minutes = parseInt(qsMinutes as string, 10);
+
+      if (!qsFrom) {
+        throw new MissingArgumentError("Missing argument: 'from'");
+      }
+
+      if (!qsTo) {
+        throw new MissingArgumentError("Missing argument: 'to'");
+      }
+
+      if (!qsOffer) {
+        throw new MissingArgumentError("Missing argument: 'offer'");
+      }
+
+      if (!qsMinutes) {
+        throw new MissingArgumentError("Missing argument: 'minutes'");
+      }
+
       const offer = await Context.getInstance().db.offer.findOne({
         where: {
           simpleName: qsOffer,
