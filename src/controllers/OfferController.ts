@@ -2,9 +2,8 @@ import { Request, Response } from "express";
 import * as HTTPStatus from "http-status";
 import { Context } from "../context";
 import { responseErrorHandler } from "../errorHandlerApi";
-import { MissingArgumentError } from "../errors/MissingArgumentError";
-import { NotFoundError } from "../errors/NotFoundError";
 import { IPrice } from "../types";
+import offerValidator from "../validators/OfferValidator";
 
 class OfferController {
   /**
@@ -37,45 +36,10 @@ class OfferController {
    */
   async calculateCallPrice(req: Request, res: Response) {
     try {
-      const { from: qsFrom, to: qsTo, offer: qsOffer, minutes: qsMinutes } = req.query;
+      const { minutes: qsMinutes } = req.query;
       const minutes = parseInt(qsMinutes as string, 10);
 
-      if (!qsFrom) {
-        throw new MissingArgumentError("Missing argument: 'from'");
-      }
-
-      if (!qsTo) {
-        throw new MissingArgumentError("Missing argument: 'to'");
-      }
-
-      if (!qsOffer) {
-        throw new MissingArgumentError("Missing argument: 'offer'");
-      }
-
-      if (!qsMinutes) {
-        throw new MissingArgumentError("Missing argument: 'minutes'");
-      }
-
-      const offer = await Context.getInstance().db.offer.findOne({
-        where: {
-          simpleName: qsOffer,
-        },
-      });
-
-      const dddFee = await Context.getInstance().db.dddFee.findOne({
-        where: {
-          fromDDD: qsFrom,
-          toDDD: qsTo,
-        },
-      });
-
-      if (!offer) {
-        throw new NotFoundError("Offer not found");
-      }
-
-      if (!dddFee) {
-        throw new NotFoundError("DDD Fee not found");
-      }
+      const { dddFee, offer } = await offerValidator.validateCalculateCallRequest(req);
 
       const feeAmount = dddFee.amount + (dddFee.amount * 10) / 100;
       const excedentMinutes = Math.max(0, minutes - offer.freeMinutes);
