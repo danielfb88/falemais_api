@@ -1,19 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import App from "../src/App";
-import { IContext } from "../src/Context";
 import { Offer } from "../src/models";
 import { IDDD, IPrice } from "../src/types";
 import { makeCtx } from "./helpers";
 const supertest = require("supertest");
 
-let ctx: IContext;
 const app = App;
 const request = supertest;
 
 describe("Integration tests", () => {
   beforeAll(() => {
-    ctx = makeCtx({});
+    makeCtx({});
   });
 
   describe("GET /api/ddd/availiable", () => {
