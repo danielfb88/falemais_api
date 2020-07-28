@@ -38,8 +38,6 @@ class OfferController {
     const { from: qsFrom, to: qsTo, offer: qsOffer, minutes: qsMinutes } = req.query;
     const minutes = parseInt(qsMinutes as string, 10);
 
-    console.log(req.query);
-
     try {
       const offer = await Context.getInstance().db.offer.findOne({
         where: {
