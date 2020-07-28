@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import App from "../src/app";
-import { IContext } from "../src/context";
+import App from "../src/App";
+import { IContext } from "../src/Context";
 import { Offer } from "../src/models";
 import { IDDD, IPrice } from "../src/types";
 import { makeCtx } from "./helpers";
@@ -113,7 +113,7 @@ describe("Integration tests", () => {
     });
 
     describe("Fail", () => {
-      test("Should return an error for fromDDD not found", done => {
+      test("Should return an error for fromDDD argument missing", done => {
         request(app)
           .get(endpoint)
           .query({ from: "", minutes: "200", offer: "fm120", to: "011" })
@@ -124,7 +124,7 @@ describe("Integration tests", () => {
           });
       });
 
-      test("Should return an error for toDDD not found", done => {
+      test("Should return an error for toDDD argument missing", done => {
         request(app)
           .get(endpoint)
           .query({ from: "018", minutes: "200", offer: "fm120", to: "" })
@@ -135,7 +135,7 @@ describe("Integration tests", () => {
           });
       });
 
-      test("Should return an error for offer not found", done => {
+      test("Should return an error for offer argument missing", done => {
         request(app)
           .get(endpoint)
           .query({ from: "018", minutes: "200", offer: "", to: "011" })
@@ -146,7 +146,7 @@ describe("Integration tests", () => {
           });
       });
 
-      test("Should return an error for minutes not found", done => {
+      test("Should return an error for minutes argument missing", done => {
         request(app)
           .get(endpoint)
           .query({ from: "018", minutes: "", offer: "fm120", to: "011" })
@@ -157,7 +157,7 @@ describe("Integration tests", () => {
           });
       });
 
-      test("Should return an error for fromDDD not found", done => {
+      test("Should return an error for fromDDD argument missing", done => {
         request(app)
           .get(endpoint)
           .query({ from: "077", minutes: "200", offer: "fm120", to: "011" })
@@ -168,7 +168,7 @@ describe("Integration tests", () => {
           });
       });
 
-      test("Should return an error for offer not found", done => {
+      test("Should return an error for offer argument missing", done => {
         request(app)
           .get(endpoint)
           .query({ from: "018", minutes: "200", offer: "fm777", to: "011" })

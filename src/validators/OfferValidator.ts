@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Context } from "../context";
+import { Context } from "../Context";
 import { MissingArgumentError, NotFoundError } from "../errors";
 
 class OfferValidator {

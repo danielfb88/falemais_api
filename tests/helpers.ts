@@ -3,8 +3,8 @@ import * as faker from "faker";
 import "reflect-metadata";
 import { Connection, createConnection, getConnectionOptions } from "typeorm";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
-import App from "../src/app";
-import { Context, IContext } from "../src/context";
+import App from "../src/App";
+import { Context, IContext } from "../src/Context";
 import { DDDFeeRepository, OfferRepository } from "../src/repositories";
 
 process.env.TZ = "UTC";

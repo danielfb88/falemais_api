@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as HTTPStatus from "http-status";
-import { Context } from "../context";
+import { Context } from "../Context";
 import { responseErrorHandler } from "../errorHandlerApi";
 import { IPrice } from "../types";
 import offerValidator from "../validators/OfferValidator";

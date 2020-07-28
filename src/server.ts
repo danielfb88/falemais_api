@@ -1,8 +1,8 @@
 import * as http from "http";
 import "reflect-metadata";
 import { createConnection, getConnectionOptions } from "typeorm";
-import App from "./app";
-import { Context } from "./context";
+import App from "./App";
+import { Context } from "./Context";
 
 process.env.TZ = "UTC";
 

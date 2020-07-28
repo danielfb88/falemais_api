@@ -1,7 +1,7 @@
 import * as bodyParser from "body-parser";
 import * as express from "express";
 import * as morgan from "morgan";
-import routes from "./routes";
+import routes from "./Routes";
 
 class App {
   public express: express.Application;
