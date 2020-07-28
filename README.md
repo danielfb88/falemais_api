@@ -1,11 +1,16 @@
 <h1 align="center">FaleMais API</h1>
 
-## First steps
+## Primeiros passos
 
-1. You will need Node.js 12 installed and PostgreSQL 10 or 11.
-2. Install dependencies with `npm ci`.
-3. Copy the `.env.example` file to the`.env` file.
-4. If you have a local PostgreSQL installed, create an empty database in it and configure `.env` with the accesses.
-5. If not, use `npm run postgres:start` and` npm run database:create` to create and configure one with Docker.
-6. Run the project locally with `npm run dev`.
-7. Run the test suite of the project with `npm test`.
+1. A versão utilizada é Node.js 12
+1. É necessário ter o PostgreSQL 10 ou 11 instalado, ou você pode usar o Docker.
+2. Instale as dependências com `npm ci`.
+3. Faça uma cópia do arquivo `.env.example` com o nome`.env`.
+4. Se você tiver uma instalação local do PostgreSQL, crie um database vazio e configure o arquivo `.env` com as informações de acesso.
+5. Se não, execute `npm run postgres:start` e `npm run database:create` para criar e configurar um database com Docker.
+6. Rode o projeto localmente com `npm run dev`.
+7. Execute os casos de teste com `npm test`.
+8. Execute `gulp` para buildar o projeto.
+9. Execute `npm start` para buildar e executar o projeto.
+
+Daniel Bonfim <daniel.fb88@gmail.com>
