@@ -1,5 +1,4 @@
 const { SnakeNamingStrategy } = require("typeorm-naming-strategies");
-const { isBoolean } = require("util");
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_LOGGING, BUILD } = process.env;
 
 module.exports = {
