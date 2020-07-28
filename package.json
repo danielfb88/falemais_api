@@ -4,7 +4,7 @@
   "description": "FaleMais API",
   "scripts": {
     "dev": "ts-node -r dotenv/config -P tsconfig.json src/server.ts",
-    "start": "gulp && node -r dotenv/config build/src/server.js",
+    "start": "gulp && BUILD=true node -r dotenv/config build/src/server.js",
     "migration:create": "typeorm migration:create --dir src/migrations --name",
     "migration:generate": "ts-node -r dotenv/config ./node_modules/typeorm/cli.js migration:generate --name",
     "migration:revert": "ts-node -r dotenv/config ./node_modules/typeorm/cli.js migration:revert",

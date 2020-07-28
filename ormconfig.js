@@ -1,5 +1,6 @@
 const { SnakeNamingStrategy } = require("typeorm-naming-strategies");
-const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_LOGGING } = process.env;
+const { isBoolean } = require("util");
+const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_LOGGING, BUILD } = process.env;
 
 module.exports = {
   type: "postgres",
@@ -14,7 +15,7 @@ module.exports = {
   cli: {
     migrationsDir: "src/migrations",
   },
-  entities: ["build/src/models/*.js"],
-  migrations: ["build/src/migrations/*.js"],
+  entities: [Boolean(BUILD) ? "build/src/models/*.js" : "src/models/*.ts"],
+  migrations: [Boolean(BUILD) ? "build/src/migrations/*.js" : "src/migrations/*.ts"],
   namingStrategy: new SnakeNamingStrategy(),
 };
